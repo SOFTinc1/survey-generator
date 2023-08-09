@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import CreateSurvey from "./pages/CreateSurvey";
+import ViewSurveys from "./pages/ViewSurveys";
+import SingleSurvey from "./components/OneSurvey";
 
-function App() {
+import { SurveyProvider } from "./lib/SurveyContext";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SurveyProvider>
+        <Routes>
+          <Route path="/" exact element={<HomePage />} />
+          <Route path="/create-survey" element={<CreateSurvey />} />
+          <Route path="/view-surveys" element={<ViewSurveys />} />
+          <Route path="/survey/:id/:step" element={<SingleSurvey />} />
+          <Route path="/survey/:id" element={<SingleSurvey />} />
+        </Routes>
+      </SurveyProvider>
     </div>
   );
-}
+};
 
 export default App;
